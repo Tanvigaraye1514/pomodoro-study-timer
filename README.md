@@ -30,7 +30,7 @@ The Pomodoro Timer is a productivity web application that helps users manage the
 Through this project, I learned about building a web application using HTML, CSS, and JavaScript. I also explored countdown timers, event handling, browser notifications or alerts, and saving data with local storage.
 
 ## Live Demo
-(https://tanvigaraye1514.github.io/pomodoro-study-timer/)
+https://tanvigaraye1514.github.io/pomodoro-study-timer/
 
 ## Author
 Created as a Pomodoro Timer project for learning and productivity.

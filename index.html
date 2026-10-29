@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff5f0" />
+    <meta
+      name="description"
+      content="A colorful Pomodoro study timer for focused work and restorative breaks."
+    />
+    <title>25:00 · Focus Session | Pomo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell focus" id="app">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+      <div class="ambient ambient-three"></div>
+
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Pomo home">
+          <span class="brand-mark"><span></span></span>
+          pomo
+        </a>
+
+        <div class="header-actions">
+          <span class="daily-goal">
+            <span id="goal-count">0/8</span>
+            Daily goal
+          </span>
+          <button
+            class="icon-button"
+            id="open-settings"
+            type="button"
+            aria-label="Open timer settings"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="timer-layout">
+        <div class="intro">
+          <span class="mode-pill">
+            <span class="live-dot"></span>
+            <span id="mode-label">Focus session</span>
+          </span>
+          <h1 id="mode-title">Time to focus</h1>
+          <p id="mode-helper">Quiet the noise. One task at a time.</p>
+
+          <label class="intention-field">
+            <span>My focus for this session</span>
+            <input
+              id="intention"
+              type="text"
+              maxlength="70"
+              placeholder="Write your intention…"
+            />
+          </label>
+        </div>
+
+        <div class="timer-card">
+          <div class="mode-switcher" aria-label="Timer mode">
+            <button class="active" type="button" data-mode="focus">Focus</button>
+            <button type="button" data-mode="break">Break</button>
+            <button type="button" data-mode="longBreak">Long</button>
+          </div>
+
+          <div class="timer-face" aria-live="polite" aria-atomic="true">
+            <svg class="progress-ring" viewBox="0 0 380 380" aria-hidden="true">
+              <circle class="progress-track" cx="190" cy="190" r="174"></circle>
+              <circle
+                class="progress-value"
+                id="progress-circle"
+                cx="190"
+                cy="190"
+                r="174"
+              ></circle>
+            </svg>
+            <div class="time-content">
+              <span class="time" id="time-display">25:00</span>
+              <span class="time-caption" id="timer-status">ready when you are</span>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button class="secondary-button" id="reset-button" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4.9 8.5A8 8 0 1 1 4 12M4 5v4h4"></path>
+              </svg>
+              Reset
+            </button>
+            <button class="primary-button" id="start-button" type="button">
+              <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m8 5 11 7-11 7V5Z"></path>
+              </svg>
+              Start
+            </button>
+            <button class="primary-button pause-button" id="pause-button" type="button" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 5v14M15 5v14"></path>
+              </svg>
+              Pause
+            </button>
+            <button
+              class="skip-button"
+              id="skip-button"
+              type="button"
+              aria-label="Skip to next mode"
+              title="Skip session (S)"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m6 6 9 6-9 6V6ZM18 6v12"></path>
+              </svg>
+            </button>
+          </div>
+          <span class="shortcut-hint">
+            <kbd>Space</kbd> start / pause <i></i> <kbd>R</kbd> reset
+            <i></i> <kbd>S</kbd> skip
+          </span>
+        </div>
+
+        <aside class="session-card">
+          <div>
+            <span class="session-label">Today's rhythm</span>
+            <strong id="session-count">0 focus sessions</strong>
+          </div>
+          <div class="session-progress" id="session-progress" aria-label="0 of 4 sessions">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="session-hint" id="session-hint">4 until a long break</span>
+          <div class="goal-track" aria-label="Daily goal progress">
+            <span id="goal-progress"></span>
+          </div>
+          <span class="goal-copy" id="goal-copy">8 to hit today's goal</span>
+        </aside>
+      </section>
+
+      <footer>
+        <span>Make space for what matters.</span>
+        <span class="footer-status">
+          <span class="status-dot"></span>
+          Sessions save automatically
+        </span>
+      </footer>
+    </main>
+
+    <div class="modal-backdrop hidden" id="settings-backdrop">
+      <section
+        class="settings-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settings-title"
+      >
+        <div class="modal-header">
+          <div>
+            <span class="modal-kicker">Preferences</span>
+            <h2 id="settings-title">Timer settings</h2>
+          </div>
+          <button
+            class="icon-button"
+            id="close-settings"
+            type="button"
+            aria-label="Close timer settings"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18"></path>
+            </svg>
+          </button>
+        </div>
+
+        <form id="settings-form">
+          <div class="setting-fields">
+            <label>
+              <span>Focus</span>
+              <span class="number-field">
+                <input id="focus-duration" type="number" min="1" max="120" required />
+                <span>min</span>
+              </span>
+            </label>
+            <label>
+              <span>Short break</span>
+              <span class="number-field">
+                <input id="break-duration" type="number" min="1" max="60" required />
+                <span>min</span>
+              </span>
+            </label>
+            <label>
+              <span>Long break</span>
+              <span class="number-field">
+                <input id="long-break-duration" type="number" min="1" max="90" required />
+                <span>min</span>
+              </span>
+            </label>
+          </div>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <p class="modal-note">
+            Your preferences and daily session count are saved on this device.
+          </p>
+          <button class="save-button" type="submit">Save changes</button>
+        </form>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
